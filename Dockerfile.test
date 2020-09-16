@@ -1,0 +1,29 @@
+# Specify a base image
+#FROM node:alpine
+FROM node:12-alpine3.12
+
+WORKDIR /opt/webapp/frontend
+
+# Copy source 
+COPY ./package.json ./
+# Install some dependencies
+RUN npm install
+
+COPY ./ ./
+
+
+# Default command
+CMD [ "npm", "run", "start" ] 
+
+# For build the image based on other dockerfile
+   # docker build -f <file-dir> . -t <image-name>
+   # docker build -f Dockerfile.dev . -t amich05/mern-template
+
+# For running image:
+    # docker run -it -p 3000:3000 <image-name>
+    # docker run -it -p 3000:3000 amich05/frontend-react-app
+
+# For updating any change of source
+    # docker run -it -p 3000:3000 -v /opt/webapp/frontend/node_modules -v $(pwd):/opt/webapp/frontend <image-name>  
+    # Important: -v after run  command
+

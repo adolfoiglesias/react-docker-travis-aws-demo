@@ -1,0 +1,11 @@
+language: generic
+
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build  -t amich05/react-app -f Dockerfile.test .
+    
+script:
+    - docker run -e CI=true amich05/react-app npm run test
